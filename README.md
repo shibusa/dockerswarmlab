@@ -5,7 +5,7 @@ This is just playing around with [Docker](https://docs.docker.com/manuals/) and 
 - [Vagrant](https://www.vagrantup.com/)
 - [Virtualbox](https://www.virtualbox.org/)
 
-### Vagrant infrastructure Setup
+## Vagrant infrastructure Setup
 1. Change to the `vagrantbuild` directory
 2. Change [network settings](https://www.vagrantup.com/docs/networking/public_network.html) to desired settings.  When I built this lab, the Vagrant/Virtualbox hypervisor is the running on the same system as my Macbook. I'm using the WiFi interface and the same network range for my Macbook as my VMs (192.168.1.0/24).  The VMs will specifically be using the range of 192.168.1.10-29.
 3. Start Vagrant VMs.  The Vagrantfile will be in charge of installing the Community version of Docker-Engine and building an insecure docker registry
@@ -13,7 +13,7 @@ This is just playing around with [Docker](https://docs.docker.com/manuals/) and 
 vagrant up
 ```
 
-#### Brief [Docker Registry](https://docs.docker.com/registry/) Overview **WIP**
+### Brief [Docker Registry](https://docs.docker.com/registry/) Overview **WIP**
 Docker registry will help distribute images across your swarm.  Images will be covered in a later section.  A non-production level registry node will be built as part of vagrant up.  Registry node setup has already been automated as well as inclusion of the insecure registry in `/etc/docker/daemon.json`.
 
 Pushing to the repository:
@@ -25,7 +25,7 @@ Pulling from the repository:
 ```
 docker pull <registryip>:5000/<reponame>
 ```
-### [Docker Swarm](https://docs.docker.com/engine/swarm/key-concepts/#what-is-a-swarm) Setup
+## [Docker Swarm](https://docs.docker.com/engine/swarm/key-concepts/#what-is-a-swarm) Setup
 We're going to start with getting all of our VMs communicating with each other in the same cluster aka Docker Swarm.  As per [Docker](https://docs.docker.com/engine/swarm/key-concepts/#what-is-a-node), Docker Swarms consist of at least one manager node whose role is to deploy tasks to the worker nodes.  With Docker's decentralized design, the manager node will take on the same responsibilities of as a worker node as well.  As a single manager node in a swarm is a single point of failure for dispatching tasks, [high availability](https://docs.docker.com/datacenter/ucp/2.1/guides/admin/configure/set-up-high-availability/) will be implemented with additional manager nodes.  In this lab setup, I'll be using the 192.168.1.10-19 for manager nodes and 192.168.1.20-29 for my worker nodes.
 
 1. Change to the `dockerbuild` directory
@@ -43,11 +43,11 @@ docker swarm join --token <token> <manager node ip>
 ```
 4. Verify swarm by issuing `docker node ls` on any of the manager nodes
 
-#### [Docker Swarm Networking](https://docs.docker.com/engine/userguide/networking/#overlay-networks-in-swarm-mode)  **WIP**
+### [Docker Swarm Networking](https://docs.docker.com/engine/userguide/networking/#overlay-networks-in-swarm-mode)  **WIP**
 10.0.0.0/24 - nginx
 10.0.10.0/24 - djangonodes
 
-### [Docker Machine](https://docs.docker.com/machine/overview/#why-should-i-use-it) Setup
+## [Docker Machine](https://docs.docker.com/machine/overview/#why-should-i-use-it) Setup
 Docker Machine will be running on your daily use system and allow you to remotely issue docker commands on those system short of actually having to ssh to each of the hosts.  This will enable you to have a prepared Dockerfile or docker-compose.yml on your local system and issue it on the remote machines without having to copy it over.
 
 1. Add the nodes you want to manage onto your local system's Docker Machine.  I'm specifically using the generic driver as I'm approaching this lab as a baremetal system.
@@ -77,8 +77,8 @@ workernode-2    -        generic   Running   tcp://192.168.1.22:2376           v
   ```
   3. Issue _docker commands_ in your local system as you would on the docker node.
 
-### Project Deployment Setup **WIP**
-#### Container Image
+## Project Deployment Setup **WIP**
+### Container Image
 1. Create a [dockerfile](https://docs.docker.com/engine/reference/builder/) that [defines your container](https://docs.docker.com/get-started/part2/#dockerfile).
 2. Build an image from your aggregated files, including dockerfile
 ```
