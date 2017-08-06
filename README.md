@@ -12,6 +12,7 @@ Table of Contents |
 ## Requirements
 - [Vagrant](https://www.vagrantup.com/)
 - [Virtualbox](https://www.virtualbox.org/)
+<sup>[Back to Top](#django-project-docker-deploy)</sup>
 
 ## Vagrant infrastructure Setup
 1. Change to the `vagrantbuild` directory
@@ -33,6 +34,8 @@ Pulling from the repository:
 ```
 docker pull <registryip>:5000/<reponame>
 ```
+<sup>[Back to Top](#django-project-docker-deploy)</sup>
+
 ## [Docker Swarm](https://docs.docker.com/engine/swarm/key-concepts/#what-is-a-swarm) Setup
 We're going to start with getting all of our VMs communicating with each other in the same cluster aka Docker Swarm.  As per [Docker](https://docs.docker.com/engine/swarm/key-concepts/#what-is-a-node), Docker Swarms consist of at least one manager node whose role is to deploy tasks to the worker nodes.  With Docker's decentralized design, the manager node will take on the same responsibilities of as a worker node as well.  As a single manager node in a swarm is a single point of failure for dispatching tasks, [high availability](https://docs.docker.com/datacenter/ucp/2.1/guides/admin/configure/set-up-high-availability/) will be implemented with additional manager nodes.  In this lab setup, I'll be using the 192.168.1.10-19 for manager nodes and 192.168.1.20-29 for my worker nodes.
 
@@ -54,6 +57,7 @@ docker swarm join --token <token> <manager node ip>
 ### [Docker Swarm Networking](https://docs.docker.com/engine/userguide/networking/#overlay-networks-in-swarm-mode)  **WIP**
 10.0.0.0/24 - nginx
 10.0.10.0/24 - djangonodes
+<sup>[Back to Top](#django-project-docker-deploy)</sup>
 
 ## [Docker Machine](https://docs.docker.com/machine/overview/#why-should-i-use-it) Setup
 Docker Machine will be running on your daily use system and allow you to remotely issue docker commands on those system short of actually having to ssh to each of the hosts.  This will enable you to have a prepared Dockerfile or docker-compose.yml on your local system and issue it on the remote machines without having to copy it over.
@@ -84,6 +88,7 @@ workernode-2    -        generic   Running   tcp://192.168.1.22:2376           v
   managernode-0
   ```
   3. Issue _docker commands_ in your local system as you would on the docker node.
+<sup>[Back to Top](#django-project-docker-deploy)</sup>
 
 ## Project Deployment Setup **WIP**
 ### Container Image
@@ -107,3 +112,4 @@ Try `docker build -t testimage <pathto>/test/` for a quick demo on dockerfile sy
 
 
 #### Stack - cluster of services
+<sup>[Back to Top](#django-project-docker-deploy)</sup>
