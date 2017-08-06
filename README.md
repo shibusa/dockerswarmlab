@@ -12,6 +12,7 @@ Table of Contents |
 ## Requirements
 - [Vagrant](https://www.vagrantup.com/)
 - [Virtualbox](https://www.virtualbox.org/)
+
 <sup>[Back to Top](#django-project-docker-deploy)</sup>
 
 ## Vagrant infrastructure Setup
@@ -34,6 +35,7 @@ Pulling from the repository:
 ```
 docker pull <registryip>:5000/<reponame>
 ```
+
 <sup>[Back to Top](#django-project-docker-deploy)</sup>
 
 ## [Docker Swarm](https://docs.docker.com/engine/swarm/key-concepts/#what-is-a-swarm) Setup
@@ -55,8 +57,7 @@ docker swarm join --token <token> <manager node ip>
 4. Verify swarm by issuing `docker node ls` on any of the manager nodes
 
 ### [Docker Swarm Networking](https://docs.docker.com/engine/userguide/networking/#overlay-networks-in-swarm-mode)  **WIP**
-10.0.0.0/24 - nginx
-10.0.10.0/24 - djangonodes
+
 <sup>[Back to Top](#django-project-docker-deploy)</sup>
 
 ## [Docker Machine](https://docs.docker.com/machine/overview/#why-should-i-use-it) Setup
@@ -88,6 +89,7 @@ workernode-2    -        generic   Running   tcp://192.168.1.22:2376           v
   managernode-0
   ```
   3. Issue _docker commands_ in your local system as you would on the docker node.
+
 <sup>[Back to Top](#django-project-docker-deploy)</sup>
 
 ## Project Deployment Setup **WIP**
@@ -112,4 +114,5 @@ Try `docker build -t testimage <pathto>/test/` for a quick demo on dockerfile sy
 
 
 #### Stack - cluster of services
+
 <sup>[Back to Top](#django-project-docker-deploy)</sup>
