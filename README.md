@@ -1,12 +1,13 @@
 # Django project Docker deploy
 This is just playing around with [Docker](https://docs.docker.com/manuals/) and implementing microservices.  Similar to the [webcluster](https://github.com/shibusa/webcluster) deploy of the Django based [ghquery](https://github.com/shibusa/ghquery) project, I'll be breaking off the nginx and django portions into their own containers.  All my VMs are using CentOS 7 running Debian 8 containers.
 
-# Table of Contents
-[Requirements](#requirements)
-[Vagrant Infrastructure](#vagrant-infrastructure-setup)
-[Docker Swarm](#docker-swarm-setup)
-[Docker Machine](#docker-machine-setup)
-[Deployment **WIP**](#project-deployment-setup-wip)
+Table of Contents |
+--- |
+[Requirements](#requirements) |
+[Vagrant Infrastructure](#vagrant-infrastructure-setup) |
+[Docker Swarm](#docker-swarm-setup) |
+[Docker Machine](#docker-machine-setup) |
+[Deployment **WIP**](#project-deployment-setup-wip) |
 
 ## Requirements
 - [Vagrant](https://www.vagrantup.com/)
