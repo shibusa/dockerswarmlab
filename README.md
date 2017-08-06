@@ -46,15 +46,15 @@ We're going to start with getting all of our VMs communicating with each other i
 ```
 docker swarm init --advertise-addr <node ip>
 ```
-  1. **Two options for additional manager nodes:**
-  - Get a manager join token by running `docker swarm join-token manager` on the first manager node.  Use the manager join token on each node you want as a manger.
-  - Use worker join token on all nodes.  On the first manager node, issue a promote `docker node promote <nodename>` for each worker node you want converted to a manger node.
+3. **Two options for additional manager nodes:**
+- Get a manager join token by running `docker swarm join-token manager` on the first manager node.  Use the manager join token on each node you want as a manger.
+- Use worker join token on all nodes.  On the first manager node, issue a promote `docker node promote <nodename>` for each worker node you want converted to a manger node.
 
-3. Join remaining nodes to swarm
+4. Join remaining nodes to swarm
 ```
 docker swarm join --token <token> <manager node ip>
 ```
-4. Verify swarm by issuing `docker node ls` on any of the manager nodes
+5. Verify swarm by issuing `docker node ls` on any of the manager nodes
 
 ### [Docker Swarm Networking](https://docs.docker.com/engine/userguide/networking/#overlay-networks-in-swarm-mode)  **WIP**
 
@@ -79,16 +79,16 @@ workernode-1    -        generic   Running   tcp://192.168.1.21:2376           v
 workernode-2    -        generic   Running   tcp://192.168.1.22:2376           v17.06.0-ce   
 ```
 3.  You can ssh to the machine as you would normally, `docker-machine ssh <node name>`, or the following:
-  1. Swap to the node of your choosing
-  ```
-  vagrantlab/Docker [master●] » eval $(docker-machine env managernode-0)
-  ```
-  2. Verify it is active
-  ```
-  vagrantlab/Docker [master●] » docker-machine active                   
-  managernode-0
-  ```
-  3. Issue _docker commands_ in your local system as you would on the docker node.
+    1. Swap to the node of your choosing
+    ```
+    vagrantlab/Docker [master●] » eval $(docker-machine env managernode-0)
+    ```
+    2. Verify it is active
+    ```
+    vagrantlab/Docker [master●] » docker-machine active                   
+    managernode-0
+    ```
+    3. Issue _docker commands_ in your local system as you would on the docker node.
 
 <sup>[Back to Top](#django-project-docker-deploy)</sup>
 
@@ -102,13 +102,13 @@ docker build -t <imagename> <directory with file contents>
 Try `docker build -t testimage <pathto>/test/` for a quick demo on dockerfile syntax
 
 **[Other useful commands](https://docs.docker.com/engine/reference/run/)**
-`docker run --name <name you wish to give to container> <imagename>` - Running instance of the container
-`docker ps -a` - List all containers
-`docker rm <container id>` - Remove unnecessary containers
-`docker images` - List images on node
-`docker rmi <image id>` - Remove image on node
-`docker attach  <container id>` - Attach local standard input, output, and error streams to a running container
-`docker exec <container id>` - Run a command in a running container
+- `docker run --name <name you wish to give to container> <imagename>` - Running instance of the container
+- `docker ps -a` - List all containers
+- `docker rm <container id>` - Remove unnecessary containers
+- `docker images` - List images on node
+- `docker rmi <image id>` - Remove image on node
+- `docker attach  <container id>` - Attach local standard input, output, and error streams to a running container
+- `docker exec <container id>` - Run a command in a running container
 
 #### Service - cluster of containers
 
